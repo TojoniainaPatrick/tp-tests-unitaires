@@ -22,6 +22,7 @@ public class Money {
 		return new Money(amount() + m.amount(), currency());
 	}
 	
+	
 	@Override
 	public boolean equals(Object obj) {
 	    if (this == obj)
