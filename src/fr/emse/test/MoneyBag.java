@@ -2,7 +2,7 @@ package fr.emse.test;
 
 import java.util.Vector;
 
-class MoneyBag {
+class MoneyBag implements IMoney{
 	
 	private Vector<Money> fMonies = new Vector<Money>();
 	
@@ -34,13 +34,32 @@ class MoneyBag {
 		}
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-	    if (this == obj)
-	        return true;
-	    if (obj == null || getClass() != obj.getClass())
-	        return false;
-	    MoneyBag other = (MoneyBag) obj;
-	    return fMonies.equals(other.fMonies);
+	public IMoney add(IMoney m) {
+		return m.addMoneyBag(this);
 	}
+
+	@Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        MoneyBag other = (MoneyBag) obj;
+        return fMonies.equals(other.fMonies);
+    }
+	
+	@Override
+    public IMoney addMoney(Money m) {
+        appendMoney(m);
+        return this;
+    }
+
+    @Override
+    public IMoney addMoneyBag(MoneyBag mb) {
+        for (Money money : mb.fMonies) {
+            appendMoney(money);
+        }
+        return this;
+    }
+    
 }
