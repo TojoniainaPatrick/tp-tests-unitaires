@@ -32,8 +32,8 @@ public class Money implements IMoney{
         Money other = (Money) obj;
         return fAmount == other.fAmount && fCurrency.equals(other.fCurrency);
     }
-	
-	@Override
+    
+    @Override
     public IMoney addMoney(Money m) {
         if (currency().equals(m.currency())) {
             return new Money(amount() + m.amount(), currency());

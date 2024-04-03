@@ -16,6 +16,10 @@ class MoneyBag implements IMoney{
 			appendMoney(bag[i]);
 	}
 	
+	public MoneyBag() {
+		// TODO Auto-generated constructor stub
+	}
+
 	private void appendMoney(Money m) {
 		if (fMonies.isEmpty()) {
 			fMonies.add(m);
@@ -47,11 +51,12 @@ class MoneyBag implements IMoney{
         MoneyBag other = (MoneyBag) obj;
         return fMonies.equals(other.fMonies);
     }
-	
-	@Override
+
+    
+    @Override
     public IMoney addMoney(Money m) {
         appendMoney(m);
-        return this;
+        return simplify();
     }
 
     @Override
@@ -59,7 +64,14 @@ class MoneyBag implements IMoney{
         for (Money money : mb.fMonies) {
             appendMoney(money);
         }
-        return this;
+        return simplify();
     }
-    
+
+    private MoneyBag simplify() {
+        MoneyBag result = new MoneyBag();
+        for (Money money : fMonies) {
+            result.appendMoney(money);
+        }
+        return result;
+    }
 }
